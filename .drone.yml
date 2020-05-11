@@ -1,0 +1,41 @@
+kind: pipeline
+type: docker
+name: test-on-amd64
+
+platform:
+  arch: amd64
+
+steps:
+- name: test1
+  image: gcc
+  commands:
+  - ./configure
+  - make
+  - make test
+  when:                                # 當觸發條件為 master 分支時會執行的動作
+    branch:
+    - master
+
+---
+kind: pipeline
+type: docker 
+name: test-on-arm64
+
+platform:
+  arch: arm64
+
+steps:
+- name: test 2
+  image: gcc
+  commands:
+  - ./configure
+  - make
+  - make test
+  when:                                # 當觸發條件為 master 分支時會執行的動作
+    branch:
+    - master
+trigger:     # 觸發 pipeline 條件，分支為 master，且進行 push 行為
+  branch: 
+  - master
+  event:
+  - push
