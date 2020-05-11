@@ -1,6 +1,6 @@
 kind: pipeline
 type: docker
-name: test-on-amd64
+name: default
 
 platform:
   arch: amd64
