@@ -7,8 +7,6 @@ steps:
 - name: backend
   image: golang:1.12-alpine
   commands:
-    - go get
-    - go build
     - go test
     - echo "done"
 
