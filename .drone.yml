@@ -5,27 +5,15 @@ type: docker
 
 steps:
 - name: backend
-  image: golang
+  image: golang:1.12-alpine
   commands:
     - go get
     - go build
     - go test
+    - echo "done"
 
-- name: frontend
-  image: node:6
-  commands:
-    - npm install
-    - npm test
-
-- name: publish
-  image: plugins/docker
-  settings:
-    repo: octocat/hello-world
-    tags: [ 1, 1.1, latest ]
-    registry: index.docker.io
-
-- name: notify
-  image: plugins/slack
-  settings:
-    channel: developers
-    username: drone
+trigger:
+  branch: 
+  - master
+  event:
+  - push
